@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://3jjouvt1wd3j"]
+
+[ext_resource type="PackedScene" uid="uid://cv0klkobsceiv" path="res://Scenes/Player.tscn" id="1_kln2b"]
+[ext_resource type="PackedScene" uid="uid://daogrmh0h2l5n" path="res://Scenes/Platform.tscn" id="2_rgh2o"]
+[ext_resource type="Script" uid="uid://dy5eiopxmt21g" path="res://Scripts/camera.gd" id="3_pbw6q"]
+
+[node name="Node2D" type="Node2D" unique_id=1348244506]
+position = Vector2(1, 0)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2026197236 node_paths=PackedStringArray("player")]
+script = ExtResource("3_pbw6q")
+player = NodePath("../World/Player")
+
+[node name="World" type="Node" parent="." unique_id=1061476293]
+
+[node name="Player" parent="World" unique_id=1462823700 instance=ExtResource("1_kln2b")]
+position = Vector2(20, -31)
+
+[node name="StaticBody2D" parent="World" unique_id=1786715908 instance=ExtResource("2_rgh2o")]
+position = Vector2(63, 251)
+
+[node name="StaticBody2D2" parent="World" unique_id=740237651 instance=ExtResource("2_rgh2o")]
+position = Vector2(264, -312)
+
+[node name="StaticBody2D3" parent="World" unique_id=37187366 instance=ExtResource("2_rgh2o")]
+position = Vector2(-152, -735)
