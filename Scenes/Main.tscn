@@ -1,26 +1,50 @@
 [gd_scene format=3 uid="uid://3jjouvt1wd3j"]
 
 [ext_resource type="PackedScene" uid="uid://cv0klkobsceiv" path="res://Scenes/Player.tscn" id="1_kln2b"]
+[ext_resource type="Script" uid="uid://142c81ht70j3" path="res://Scenes/despawn_zone.gd" id="2_jw32o"]
 [ext_resource type="PackedScene" uid="uid://daogrmh0h2l5n" path="res://Scenes/Platform.tscn" id="2_rgh2o"]
 [ext_resource type="Script" uid="uid://dy5eiopxmt21g" path="res://Scripts/camera.gd" id="3_pbw6q"]
+[ext_resource type="Resource" uid="uid://nrcpwt1h08fo" path="res://Resources/default_player_config.tres" id="3_rgh2o"]
+[ext_resource type="Script" uid="uid://4l73wwgnndfb" path="res://world_generator.gd" id="5_pbw6q"]
+[ext_resource type="Resource" uid="uid://coarmplhdrj5n" path="res://Resources/default_world_config.tres" id="6_v1gob"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kln2b"]
+size = Vector2(720, 86)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v1gob"]
+size = Vector2(756, 47)
 
 [node name="Node2D" type="Node2D" unique_id=1348244506]
-position = Vector2(1, 0)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2026197236 node_paths=PackedStringArray("player")]
 script = ExtResource("3_pbw6q")
 player = NodePath("../World/Player")
 
+[node name="DeathZone" type="Area2D" parent="Camera2D" unique_id=1737682370]
+position = Vector2(-6, 581)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/DeathZone" unique_id=1612273606]
+position = Vector2(3, 17)
+shape = SubResource("RectangleShape2D_kln2b")
+
+[node name="DespawnZone" type="Area2D" parent="Camera2D" unique_id=555743330]
+position = Vector2(-2, 652)
+script = ExtResource("2_jw32o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/DespawnZone" unique_id=349599984]
+position = Vector2(-4, 13.5)
+shape = SubResource("RectangleShape2D_v1gob")
+
 [node name="World" type="Node" parent="." unique_id=1061476293]
 
 [node name="Player" parent="World" unique_id=1462823700 instance=ExtResource("1_kln2b")]
-position = Vector2(20, -31)
+position = Vector2(2, 19)
+config = ExtResource("3_rgh2o")
 
-[node name="StaticBody2D" parent="World" unique_id=1786715908 instance=ExtResource("2_rgh2o")]
-position = Vector2(63, 251)
+[node name="WorldGenerator" type="Node2D" parent="." unique_id=1531256657 groups=["platforms"]]
+position = Vector2(0, 639)
+script = ExtResource("5_pbw6q")
+world_config = ExtResource("6_v1gob")
+platform_scene = ExtResource("2_rgh2o")
 
-[node name="StaticBody2D2" parent="World" unique_id=740237651 instance=ExtResource("2_rgh2o")]
-position = Vector2(264, -312)
-
-[node name="StaticBody2D3" parent="World" unique_id=37187366 instance=ExtResource("2_rgh2o")]
-position = Vector2(-152, -735)
+[connection signal="body_entered" from="Camera2D/DeathZone" to="World/Player" method="_on_death_zone_body_entered"]

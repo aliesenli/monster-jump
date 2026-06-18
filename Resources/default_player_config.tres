@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PlayerConfig" format=3 uid="uid://nrcpwt1h08fo"]
+
+[ext_resource type="Script" uid="uid://cje8c4pba4wio" path="res://Scripts/player_config.gd" id="1_6wx4n"]
+
+[resource]
+script = ExtResource("1_6wx4n")
+jump_velocity = -800.0
+speed = 400.0
+metadata/_custom_type_script = "uid://cje8c4pba4wio"
