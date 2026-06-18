@@ -4,24 +4,17 @@
 [ext_resource type="Texture2D" uid="uid://ru8px14nb1w4" path="res://Assets/PNG/Environment/ground_grass_broken.png" id="1_pquxj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8n7cf"]
-size = Vector2(381, 96)
+size = Vector2(193, 65)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kti7u"]
-size = Vector2(382.5, 4)
-
-[node name="StaticBody2D" type="StaticBody2D" unique_id=1786715908]
+[node name="Platform" type="StaticBody2D" unique_id=1786715908 groups=["platforms"]]
 script = ExtResource("1_8n7cf")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1925717815]
+position = Vector2(-95, -16)
+scale = Vector2(0.5, 0.65957445)
 texture = ExtResource("1_pquxj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=87785738]
-position = Vector2(-0.5, -1)
+position = Vector2(-94.5, -14.5)
 shape = SubResource("RectangleShape2D_8n7cf")
 one_way_collision = true
-
-[node name="Area2D" type="Area2D" parent="." unique_id=1067828749]
-
-[node name="JumpTriggerZone" type="CollisionShape2D" parent="Area2D" unique_id=1717416698]
-position = Vector2(-0.25, -51)
-shape = SubResource("RectangleShape2D_kti7u")

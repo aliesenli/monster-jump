@@ -3,17 +3,18 @@
 [ext_resource type="Script" uid="uid://b6i7o8nve4q6n" path="res://Scripts/player.gd" id="1_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://bviuatlgqvha4" path="res://Assets/PNG/Players/bunny1_ready.png" id="1_rpqav"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kyqiw"]
-size = Vector2(126, 195)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kyqiw"]
+radius = 48.0
+height = 166.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1154179902]
 script = ExtResource("1_kyqiw")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1790710847]
+position = Vector2(-14, -23.25)
+scale = Vector2(0.76666665, 0.75654453)
 texture = ExtResource("1_rpqav")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=232707002]
-position = Vector2(0, -0.5)
-shape = SubResource("RectangleShape2D_kyqiw")
-
-[node name="Player" type="Node2D" parent="." unique_id=1462823700]
+position = Vector2(-14, -26)
+shape = SubResource("CapsuleShape2D_kyqiw")
