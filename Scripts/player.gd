@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var config: PlayerConfig
 
-const START_POSITION = Vector2(360, 0)
+const START_POSITION = Vector2(0, 0)
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _physics_process(delta):

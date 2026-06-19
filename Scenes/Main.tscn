@@ -63,7 +63,7 @@ shape = SubResource("RectangleShape2D_v1gob")
 [node name="World" type="Node" parent="." unique_id=1061476293]
 
 [node name="Player" parent="World" unique_id=1462823700 instance=ExtResource("1_kln2b")]
-position = Vector2(360, 0)
+position = Vector2(0, 0)
 config = ExtResource("3_rgh2o")
 
 [node name="StartPlatform" type="StaticBody2D" parent="." unique_id=1000000020]
