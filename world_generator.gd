@@ -3,6 +3,8 @@ extends Node2D
 @export var world_config: WorldConfig 
 @export var platform_scene: PackedScene
 
+const SPAWN_START_OFFSET = 100.0
+
 var platform_pool: Array[Node2D] = []
 var next_spawn_y: float = 0.0
 
@@ -15,8 +17,9 @@ func _ready() -> void:
 	# Am EventBus für das Despawn-Signal registrieren
 	EventBus.platform_despawn_requested.connect(_on_platform_despawn_requested)
 	
-	# Die Start-Y-Position festlegen (z.B. knapp über der Startposition des Spielers)
-	next_spawn_y = global_position.y
+	# Plattformen ab Spielerstart nach oben spawnen
+	var player = get_tree().get_first_node_in_group("player")
+	next_spawn_y = player.global_position.y - SPAWN_START_OFFSET if player else global_position.y
 	
 	# Den Pool initial befüllen
 	_initialize_pool()
@@ -60,4 +63,10 @@ func _reposition_platform(platform: Node2D) -> void:
 
 func _on_platform_despawn_requested(platform: Node2D) -> void:
 	if platform in platform_pool:
+		_reposition_platform(platform)
+
+func reset() -> void:
+	var player = get_tree().get_first_node_in_group("player")
+	next_spawn_y = player.global_position.y - SPAWN_START_OFFSET if player else global_position.y
+	for platform in platform_pool:
 		_reposition_platform(platform)
