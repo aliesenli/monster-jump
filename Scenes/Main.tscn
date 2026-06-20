@@ -7,6 +7,10 @@
 [ext_resource type="Resource" uid="uid://nrcpwt1h08fo" path="res://Resources/default_player_config.tres" id="3_rgh2o"]
 [ext_resource type="Script" uid="uid://4l73wwgnndfb" path="res://world_generator.gd" id="5_pbw6q"]
 [ext_resource type="Resource" uid="uid://coarmplhdrj5n" path="res://Resources/default_world_config.tres" id="6_v1gob"]
+[ext_resource type="Script" path="res://Scripts/main.gd" id="8_main"]
+[ext_resource type="Script" path="res://Scripts/ui_manager.gd" id="9_uimgr"]
+[ext_resource type="Texture2D" path="res://Assets/PNG/Environment/ground_stone.png" id="10_ground"]
+[ext_resource type="Texture2D" path="res://Assets/PNG/Background/bg_layer1.png" id="11_bg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kln2b"]
 size = Vector2(720, 86)
@@ -14,21 +18,42 @@ size = Vector2(720, 86)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v1gob"]
 size = Vector2(756, 47)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
+size = Vector2(380, 47)
+
 [node name="Node2D" type="Node2D" unique_id=1348244506]
+script = ExtResource("8_main")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2026197236 node_paths=PackedStringArray("player")]
+position = Vector2(0, -540)
 script = ExtResource("3_pbw6q")
 player = NodePath("../World/Player")
 
+[node name="Background" type="CanvasLayer" parent="Camera2D" unique_id=1000000030]
+layer = -1
+
+[node name="BGRect" type="TextureRect" parent="Camera2D/Background" unique_id=1000000031]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -360.0
+offset_top = -640.0
+offset_right = 360.0
+offset_bottom = 640.0
+texture = ExtResource("11_bg")
+expand_mode = 3
+stretch_mode = 1
+
 [node name="DeathZone" type="Area2D" parent="Camera2D" unique_id=1737682370]
-position = Vector2(-6, 581)
+position = Vector2(-6, 700)
+
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/DeathZone" unique_id=1612273606]
 position = Vector2(3, 17)
 shape = SubResource("RectangleShape2D_kln2b")
 
 [node name="DespawnZone" type="Area2D" parent="Camera2D" unique_id=555743330]
-position = Vector2(-2, 652)
+position = Vector2(-2, 750)
 script = ExtResource("2_jw32o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/DespawnZone" unique_id=349599984]
@@ -38,13 +63,163 @@ shape = SubResource("RectangleShape2D_v1gob")
 [node name="World" type="Node" parent="." unique_id=1061476293]
 
 [node name="Player" parent="World" unique_id=1462823700 instance=ExtResource("1_kln2b")]
-position = Vector2(2, 19)
+position = Vector2(0, 0)
 config = ExtResource("3_rgh2o")
 
+[node name="StartPlatform" type="StaticBody2D" parent="." unique_id=1000000020]
+position = Vector2(0, 80)
+
+[node name="Tile1" type="Sprite2D" parent="StartPlatform" unique_id=1000000021]
+position = Vector2(-380, 0)
+texture = ExtResource("10_ground")
+
+[node name="Collision1" type="CollisionShape2D" parent="StartPlatform" unique_id=1000000022]
+position = Vector2(-380, 0)
+shape = SubResource("RectangleShape2D_ground")
+
+[node name="Tile2" type="Sprite2D" parent="StartPlatform" unique_id=1000000023]
+position = Vector2(0, 0)
+texture = ExtResource("10_ground")
+
+[node name="Collision2" type="CollisionShape2D" parent="StartPlatform" unique_id=1000000024]
+position = Vector2(0, 0)
+shape = SubResource("RectangleShape2D_ground")
+
+[node name="Tile3" type="Sprite2D" parent="StartPlatform" unique_id=1000000025]
+position = Vector2(380, 0)
+texture = ExtResource("10_ground")
+
+[node name="Collision3" type="CollisionShape2D" parent="StartPlatform" unique_id=1000000026]
+position = Vector2(380, 0)
+shape = SubResource("RectangleShape2D_ground")
+
 [node name="WorldGenerator" type="Node2D" parent="." unique_id=1531256657 groups=["platforms"]]
-position = Vector2(0, 639)
+position = Vector2(0, 0)
 script = ExtResource("5_pbw6q")
 world_config = ExtResource("6_v1gob")
 platform_scene = ExtResource("2_rgh2o")
 
+[node name="UI" type="CanvasLayer" parent="." unique_id=1000000001]
+layer = 10
+process_mode = 3
+script = ExtResource("9_uimgr")
+
+[node name="MainMenuPanel" type="Control" parent="UI" unique_id=1000000002]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="UI/MainMenuPanel" unique_id=1000000003]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.7)
+
+[node name="TitleLabel" type="Label" parent="UI/MainMenuPanel" unique_id=1000000004]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 380.0
+offset_right = 560.0
+offset_bottom = 440.0
+text = "Monster Jump"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 48
+
+[node name="HighscoreLabel" type="Label" parent="UI/MainMenuPanel" unique_id=1000000005]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 460.0
+offset_right = 560.0
+offset_bottom = 510.0
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 28
+
+[node name="StartButton" type="Button" parent="UI/MainMenuPanel" unique_id=1000000006]
+layout_mode = 0
+offset_left = 260.0
+offset_top = 540.0
+offset_right = 460.0
+offset_bottom = 610.0
+text = "Start"
+theme_override_font_sizes/font_size = 32
+
+[node name="HUDPanel" type="Control" parent="UI" unique_id=1000000007]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScoreLabel" type="Label" parent="UI/HUDPanel" unique_id=1000000008]
+layout_mode = 0
+offset_left = 260.0
+offset_top = 20.0
+offset_right = 460.0
+offset_bottom = 70.0
+text = "0m"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 36
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
+[node name="PauseButton" type="Button" parent="UI/HUDPanel" unique_id=1000000009]
+layout_mode = 0
+offset_left = 640.0
+offset_top = 20.0
+offset_right = 700.0
+offset_bottom = 80.0
+text = "II"
+theme_override_font_sizes/font_size = 28
+
+[node name="PauseMenuPanel" type="Control" parent="UI" unique_id=1000000010]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="UI/PauseMenuPanel" unique_id=1000000011]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="ResumeButton" type="Button" parent="UI/PauseMenuPanel" unique_id=1000000012]
+layout_mode = 0
+offset_left = 210.0
+offset_top = 540.0
+offset_right = 510.0
+offset_bottom = 610.0
+text = "Weiterspielen"
+theme_override_font_sizes/font_size = 32
+
+[node name="RestartButton" type="Button" parent="UI/PauseMenuPanel" unique_id=1000000013]
+layout_mode = 0
+offset_left = 210.0
+offset_top = 630.0
+offset_right = 510.0
+offset_bottom = 700.0
+text = "Neustart"
+theme_override_font_sizes/font_size = 32
+
 [connection signal="body_entered" from="Camera2D/DeathZone" to="World/Player" method="_on_death_zone_body_entered"]
+[connection signal="pressed" from="UI/MainMenuPanel/StartButton" to="UI" method="_on_start_button_pressed"]
+[connection signal="pressed" from="UI/HUDPanel/PauseButton" to="UI" method="_on_pause_button_pressed"]
+[connection signal="pressed" from="UI/PauseMenuPanel/ResumeButton" to="UI" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="UI/PauseMenuPanel/RestartButton" to="UI" method="_on_restart_button_pressed"]
