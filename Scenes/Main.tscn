@@ -5,10 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://daogrmh0h2l5n" path="res://Scenes/Platform.tscn" id="2_rgh2o"]
 [ext_resource type="Script" uid="uid://dy5eiopxmt21g" path="res://Scripts/camera.gd" id="3_pbw6q"]
 [ext_resource type="Resource" uid="uid://nrcpwt1h08fo" path="res://Resources/default_player_config.tres" id="3_rgh2o"]
-[ext_resource type="Script" uid="uid://4l73wwgnndfb" path="res://world_generator.gd" id="5_pbw6q"]
+[ext_resource type="Script" uid="uid://4l73wwgnndfb" path="res://Scripts/world_generator.gd" id="5_pbw6q"]
 [ext_resource type="Resource" uid="uid://coarmplhdrj5n" path="res://Resources/default_world_config.tres" id="6_v1gob"]
-[ext_resource type="Script" uid="uid://fgekokjw5a6m" path="res://Scripts/main.gd" id="8_main"]
-[ext_resource type="Script" uid="uid://c5mufnvrm810a" path="res://Scripts/ui_manager.gd" id="9_uimgr"]
+[ext_resource type="Script" path="res://Scripts/main.gd" id="8_main"]
+[ext_resource type="Script" path="res://Scripts/ui_manager.gd" id="9_uimgr"]
 [ext_resource type="Texture2D" uid="uid://c60s6cp1tac48" path="res://Assets/PNG/Environment/ground_stone.png" id="10_ground"]
 [ext_resource type="Texture2D" uid="uid://cxsmdmlfipgty" path="res://Assets/PNG/Background/bg_layer1.png" id="11_bg"]
 
