@@ -11,8 +11,7 @@ var player_ref: CharacterBody2D
 var world_generator_ref: Node2D
 var camera_ref: Camera2D
 
-const SAVE_PATH = "user://highscore.dat"
-const SCORE_DIVISOR = 10.0
+var config: GameConfig = preload("res://Resources/default_game_config.tres")
 
 func _ready() -> void:
 	_load_highscore()
@@ -23,7 +22,7 @@ func _process(_delta: float) -> void:
 		return
 	if not player_ref:
 		return
-	var new_score = int(floor((start_y - player_ref.global_position.y) / SCORE_DIVISOR))
+	var new_score = int(floor((start_y - player_ref.global_position.y) / config.score_divisor))
 	if new_score > current_score:
 		current_score = new_score
 		EventBus.score_updated.emit(current_score)
@@ -77,15 +76,15 @@ func _on_player_died() -> void:
 	EventBus.game_over.emit(current_score, highscore)
 
 func _load_highscore() -> void:
-	if not FileAccess.file_exists(SAVE_PATH):
+	if not FileAccess.file_exists(config.save_path):
 		return
-	var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
+	var file = FileAccess.open(config.save_path, FileAccess.READ)
 	if file:
 		highscore = file.get_32()
 		file.close()
 
 func _save_highscore() -> void:
-	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	var file = FileAccess.open(config.save_path, FileAccess.WRITE)
 	if file:
 		file.store_32(highscore)
 		file.close()

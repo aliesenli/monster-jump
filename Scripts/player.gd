@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 @export var config: PlayerConfig
 
-const START_POSITION = Vector2(0, 0)
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _physics_process(delta):
@@ -24,7 +23,7 @@ func _physics_process(delta):
 		velocity.y = config.jump_velocity
 
 func reset() -> void:
-	global_position = START_POSITION
+	global_position = config.start_position
 	velocity = Vector2.ZERO
 
 func _on_death_zone_body_entered(body: Node2D) -> void:

@@ -1,16 +1,16 @@
 [gd_scene format=3 uid="uid://3jjouvt1wd3j"]
 
 [ext_resource type="PackedScene" uid="uid://cv0klkobsceiv" path="res://Scenes/Player.tscn" id="1_kln2b"]
-[ext_resource type="Script" uid="uid://142c81ht70j3" path="res://Scenes/despawn_zone.gd" id="2_jw32o"]
+[ext_resource type="Script" uid="uid://142c81ht70j3" path="res://despawn_zone.gd" id="2_jw32o"]
 [ext_resource type="PackedScene" uid="uid://daogrmh0h2l5n" path="res://Scenes/Platform.tscn" id="2_rgh2o"]
 [ext_resource type="Script" uid="uid://dy5eiopxmt21g" path="res://Scripts/camera.gd" id="3_pbw6q"]
 [ext_resource type="Resource" uid="uid://nrcpwt1h08fo" path="res://Resources/default_player_config.tres" id="3_rgh2o"]
 [ext_resource type="Script" uid="uid://4l73wwgnndfb" path="res://world_generator.gd" id="5_pbw6q"]
 [ext_resource type="Resource" uid="uid://coarmplhdrj5n" path="res://Resources/default_world_config.tres" id="6_v1gob"]
-[ext_resource type="Script" path="res://Scripts/main.gd" id="8_main"]
-[ext_resource type="Script" path="res://Scripts/ui_manager.gd" id="9_uimgr"]
-[ext_resource type="Texture2D" path="res://Assets/PNG/Environment/ground_stone.png" id="10_ground"]
-[ext_resource type="Texture2D" path="res://Assets/PNG/Background/bg_layer1.png" id="11_bg"]
+[ext_resource type="Script" uid="uid://fgekokjw5a6m" path="res://Scripts/main.gd" id="8_main"]
+[ext_resource type="Script" uid="uid://c5mufnvrm810a" path="res://Scripts/ui_manager.gd" id="9_uimgr"]
+[ext_resource type="Texture2D" uid="uid://c60s6cp1tac48" path="res://Assets/PNG/Environment/ground_stone.png" id="10_ground"]
+[ext_resource type="Texture2D" uid="uid://cxsmdmlfipgty" path="res://Assets/PNG/Background/bg_layer1.png" id="11_bg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kln2b"]
 size = Vector2(720, 86)
@@ -47,7 +47,6 @@ stretch_mode = 1
 [node name="DeathZone" type="Area2D" parent="Camera2D" unique_id=1737682370]
 position = Vector2(-6, 700)
 
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/DeathZone" unique_id=1612273606]
 position = Vector2(3, 17)
 shape = SubResource("RectangleShape2D_kln2b")
@@ -63,7 +62,6 @@ shape = SubResource("RectangleShape2D_v1gob")
 [node name="World" type="Node" parent="." unique_id=1061476293]
 
 [node name="Player" parent="World" unique_id=1462823700 instance=ExtResource("1_kln2b")]
-position = Vector2(0, 0)
 config = ExtResource("3_rgh2o")
 
 [node name="StartPlatform" type="StaticBody2D" parent="." unique_id=1000000020]
@@ -78,11 +76,9 @@ position = Vector2(-380, 0)
 shape = SubResource("RectangleShape2D_ground")
 
 [node name="Tile2" type="Sprite2D" parent="StartPlatform" unique_id=1000000023]
-position = Vector2(0, 0)
 texture = ExtResource("10_ground")
 
 [node name="Collision2" type="CollisionShape2D" parent="StartPlatform" unique_id=1000000024]
-position = Vector2(0, 0)
 shape = SubResource("RectangleShape2D_ground")
 
 [node name="Tile3" type="Sprite2D" parent="StartPlatform" unique_id=1000000025]
@@ -94,14 +90,13 @@ position = Vector2(380, 0)
 shape = SubResource("RectangleShape2D_ground")
 
 [node name="WorldGenerator" type="Node2D" parent="." unique_id=1531256657 groups=["platforms"]]
-position = Vector2(0, 0)
 script = ExtResource("5_pbw6q")
 world_config = ExtResource("6_v1gob")
 platform_scene = ExtResource("2_rgh2o")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1000000001]
-layer = 10
 process_mode = 3
+layer = 10
 script = ExtResource("9_uimgr")
 
 [node name="MainMenuPanel" type="Control" parent="UI" unique_id=1000000002]
@@ -127,10 +122,10 @@ offset_left = 160.0
 offset_top = 380.0
 offset_right = 560.0
 offset_bottom = 440.0
+theme_override_font_sizes/font_size = 48
 text = "Monster Jump"
 horizontal_alignment = 1
 vertical_alignment = 1
-theme_override_font_sizes/font_size = 48
 
 [node name="HighscoreLabel" type="Label" parent="UI/MainMenuPanel" unique_id=1000000005]
 layout_mode = 0
@@ -138,10 +133,9 @@ offset_left = 160.0
 offset_top = 460.0
 offset_right = 560.0
 offset_bottom = 510.0
-text = ""
+theme_override_font_sizes/font_size = 28
 horizontal_alignment = 1
 vertical_alignment = 1
-theme_override_font_sizes/font_size = 28
 
 [node name="StartButton" type="Button" parent="UI/MainMenuPanel" unique_id=1000000006]
 layout_mode = 0
@@ -149,8 +143,8 @@ offset_left = 260.0
 offset_top = 540.0
 offset_right = 460.0
 offset_bottom = 610.0
-text = "Start"
 theme_override_font_sizes/font_size = 32
+text = "Start"
 
 [node name="HUDPanel" type="Control" parent="UI" unique_id=1000000007]
 visible = false
@@ -167,11 +161,11 @@ offset_left = 260.0
 offset_top = 20.0
 offset_right = 460.0
 offset_bottom = 70.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 36
 text = "0m"
 horizontal_alignment = 1
 vertical_alignment = 1
-theme_override_font_sizes/font_size = 36
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 
 [node name="PauseButton" type="Button" parent="UI/HUDPanel" unique_id=1000000009]
 layout_mode = 0
@@ -179,8 +173,8 @@ offset_left = 640.0
 offset_top = 20.0
 offset_right = 700.0
 offset_bottom = 80.0
-text = "II"
 theme_override_font_sizes/font_size = 28
+text = "II"
 
 [node name="PauseMenuPanel" type="Control" parent="UI" unique_id=1000000010]
 visible = false
@@ -206,8 +200,8 @@ offset_left = 210.0
 offset_top = 540.0
 offset_right = 510.0
 offset_bottom = 610.0
-text = "Weiterspielen"
 theme_override_font_sizes/font_size = 32
+text = "Weiterspielen"
 
 [node name="RestartButton" type="Button" parent="UI/PauseMenuPanel" unique_id=1000000013]
 layout_mode = 0
@@ -215,8 +209,8 @@ offset_left = 210.0
 offset_top = 630.0
 offset_right = 510.0
 offset_bottom = 700.0
-text = "Neustart"
 theme_override_font_sizes/font_size = 32
+text = "Neustart"
 
 [connection signal="body_entered" from="Camera2D/DeathZone" to="World/Player" method="_on_death_zone_body_entered"]
 [connection signal="pressed" from="UI/MainMenuPanel/StartButton" to="UI" method="_on_start_button_pressed"]
