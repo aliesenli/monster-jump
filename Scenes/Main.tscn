@@ -12,6 +12,12 @@
 [ext_resource type="Texture2D" uid="uid://c60s6cp1tac48" path="res://Assets/PNG/Environment/ground_stone.png" id="10_ground"]
 [ext_resource type="Texture2D" uid="uid://cxsmdmlfipgty" path="res://Assets/PNG/Background/bg_layer1.png" id="11_bg"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4kpch"]
+size = Vector2(360, 1280)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_grg3l"]
+size = Vector2(360, 1280)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kln2b"]
 size = Vector2(720, 86)
 
@@ -29,6 +35,16 @@ position = Vector2(0, -540)
 script = ExtResource("3_pbw6q")
 player = NodePath("../World/Player")
 
+[node name="TouchRight" type="TouchScreenButton" parent="Camera2D" unique_id=709535586]
+position = Vector2(181, -1)
+shape = SubResource("RectangleShape2D_4kpch")
+action = "move_right"
+
+[node name="TouchLeft" type="TouchScreenButton" parent="Camera2D" unique_id=1089523491]
+position = Vector2(-186, -2)
+shape = SubResource("RectangleShape2D_grg3l")
+action = "move_left"
+
 [node name="Background" type="CanvasLayer" parent="Camera2D" unique_id=1000000030]
 layer = -1
 
@@ -40,6 +56,8 @@ offset_left = -360.0
 offset_top = -640.0
 offset_right = 360.0
 offset_bottom = 640.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("11_bg")
 expand_mode = 3
 stretch_mode = 1
