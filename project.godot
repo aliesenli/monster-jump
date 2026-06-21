@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Neues Spiel"
+config/name="Monster Jump"
 run/main_scene="uid://3jjouvt1wd3j"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
