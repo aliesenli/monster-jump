@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://c175yan38caf4"]
+
+[ext_resource type="AudioStream" uid="uid://b6fym0ayylhfu" path="res://Assets/Audio/tatamusic-game-gaming-video-game-music-482380.mp3" id="1_fnn4p"]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" unique_id=668923297]
+position = Vector2(-2, 0)
+stream = ExtResource("1_fnn4p")
+autoplay = true
